@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(include)
 
 # Kern-Bibliothek
-add_library(option_engine STATIC src/black_scholes.cpp)
+add_library(option_engine STATIC src/black_scholes.cpp src/monte_carlo.cpp)
 
 # Hauptprogramm
 add_executable(main_exec src/main.cpp)
@@ -23,7 +23,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 
-add_executable(unit_tests tests/test_black_scholes.cpp)
+add_executable(unit_tests tests/test_black_scholes.cpp tests/test_monte_carlo.cpp)
 target_link_libraries(unit_tests PRIVATE option_engine Catch2::Catch2WithMain)
 
 enable_testing()
