@@ -1,6 +1,5 @@
 #include "black_scholes.hpp"
 #include <cmath>
-#include <numbers>
 
 double BlackScholes::cumulative_normal_distribution(double x){
 
@@ -8,7 +7,7 @@ double BlackScholes::cumulative_normal_distribution(double x){
 }
 
 double BlackScholes::normal_pdf(double x){
-    double const inv_sqrt_2pi = std::numbers::inv_sqrtpi / std::numbers::sqrt2;
+    double const inv_sqrt_2pi = 0.39894228040143267793994605993438;
     return inv_sqrt_2pi * std::exp(-0.5 * x * x);
 }
 
