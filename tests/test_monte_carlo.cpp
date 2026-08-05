@@ -36,4 +36,24 @@ TEST_CASE("Monte Carlo Greeks vs. Analytical Greeks", "[monte_carlo]") {
         // delta should be within 1% of the analytically derived value of delta
         REQUIRE_THAT(mc_greeks.delta, Catch::Matchers::WithinRel(bs_greeks.delta, 0.01));
     }
+
+    SECTION("Gamma is positive and finite") {
+        REQUIRE(mc_greeks.gamma > 0.0);
+    }
+}
+
+TEST_CASE("Monte Carlo Put Price Convergence", "[monte_carlo]") {
+    double S = 100.0;
+    double K = 100.0;
+    double T = 1.0;
+    double r = 0.05;
+    double sigma = 0.2;
+    std::size_t num_sims = 1000000;
+
+    double analytical_put = BlackScholes::price(OptionType::Put, S, K, T, r, sigma);
+    double mc_put = MonteCarlo::price(OptionType::Put, S, K, T, r, sigma, num_sims);
+
+    SECTION("Put Price Convergence") {
+        REQUIRE_THAT(mc_put, Catch::Matchers::WithinRel(analytical_put, 0.01));
+    }
 }

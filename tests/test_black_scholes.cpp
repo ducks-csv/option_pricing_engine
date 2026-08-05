@@ -23,6 +23,33 @@ TEST_CASE("Black-Scholes Standard Price", "[black_scholes]"){
     }
 }
 
+TEST_CASE("Black-Scholes Greeks", "[black_scholes]") {
+    double S = 100.0;
+    double K = 100.0;
+    double T = 1.0;
+    double r = 0.05;
+    double sigma = 0.2;
+
+    Greeks call_greeks = BlackScholes::greeks(OptionType::Call, S, K, T, r, sigma);
+    Greeks put_greeks = BlackScholes::greeks(OptionType::Put, S, K, T, r, sigma);
+
+    SECTION("Call delta is between 0 and 1") {
+        REQUIRE(call_greeks.delta > 0.0);
+        REQUIRE(call_greeks.delta < 1.0);
+    }
+
+    SECTION("Put delta relationship") {
+        REQUIRE_THAT(call_greeks.delta - put_greeks.delta, Catch::Matchers::WithinRel(1.0, 0.0001));
+    }
+
+    SECTION("Greeks magnitude") {
+        REQUIRE(call_greeks.gamma > 0.0);
+        REQUIRE(put_greeks.gamma > 0.0);
+        REQUIRE(call_greeks.vega > 0.0);
+        REQUIRE(put_greeks.vega > 0.0);
+    }
+}
+
 TEST_CASE("Put-Call-Parity", "[black_scholes]"){
     // C - P = S - K * exp(-r * T)
     double S = 120.0;
