@@ -29,7 +29,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(unit_tests tests/test_black_scholes.cpp tests/test_monte_carlo.cpp)
+add_executable(unit_tests tests/test_black_scholes.cpp tests/test_monte_carlo.cpp tests/test_bindings.cpp)
 target_link_libraries(unit_tests PRIVATE option_engine_core Catch2::Catch2WithMain)
 
 enable_testing()
@@ -42,6 +42,8 @@ FetchContent_Declare(
     GIT_TAG        v2.11.1
 )
 FetchContent_MakeAvailable(pybind11)
+
+target_link_libraries(unit_tests PRIVATE pybind11::embed)
 
 pybind11_add_module(option_engine src/bindings.cpp)
 target_link_libraries(option_engine PRIVATE option_engine_core)
