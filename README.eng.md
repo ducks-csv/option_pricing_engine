@@ -3,7 +3,7 @@
 <div align="center">
 
 [![C++ Standard](https://img.shields.io/badge/C%2B%2B-17-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://en.cppreference.com/w/cpp/17)
-[![Python Version](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Python Version](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Pybind11](https://img.shields.io/badge/Powered%20By-pybind11-orange?style=for-the-badge)](https://github.com/pybind/pybind11)
 
 [English](README.eng.md) | [German](README.md)
